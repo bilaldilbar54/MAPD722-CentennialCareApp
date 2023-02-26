@@ -1,16 +1,7 @@
-# centennial_care
-
 A new Flutter project.
 
-## Getting Started
+A Patient Clinical Data management application for the health care providers (i.e. nurses and doctors) in hospitals. In this course, we are asked to build a mobile client for this using Flutter based on a REST API Service.
 
-This project is a starting point for a Flutter application.
+The following requirements have to be satisfied by our application:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1- App shall allow healthcare providers to add/update/view patient data to track and monitor patient records. 2- App shall allow healthcare providers to add/update/view the detailed clinical data (Historical tests) of an individual patient. 3- App shall allow healthcare providers to find any patients in critical condition. Critical conditions are determined automatically based on the latest results. 4- The clinical data can include the following information: Date/time, Type of Data, Reading/Value Data Type: Blood Pressure (X/Y mmHg) Respiratory Rate (X/min) Blood Oxygen Level (X%) Heartbeat Rate (X/min)
