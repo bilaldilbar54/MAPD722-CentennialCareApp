@@ -6,18 +6,22 @@ class RoundButton extends StatelessWidget {
   final String title2;
   final double width;
   final double height;
+  final String onTap;
 
   const RoundButton(
       {super.key,
       required this.title1,
       required this.title2,
       required this.height,
-      required this.width});
+      required this.width,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamed(context, onTap);
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: darkGreen,
         shape: const CircleBorder(),

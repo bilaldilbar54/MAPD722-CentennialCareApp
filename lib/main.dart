@@ -1,5 +1,9 @@
+import 'package:centennial_care/screens/add_patients_screen.dart';
+import 'package:centennial_care/screens/critical_patients_screen.dart';
 import 'package:centennial_care/screens/home_screen.dart';
 import 'package:centennial_care/screens/login_screen.dart';
+import 'package:centennial_care/screens/monitor_records_screen.dart';
+import 'package:centennial_care/screens/view_patients_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,6 +22,10 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoginPage(),
         '/home': (context) => const HomePage(),
+        '/addPatient': (context) => const AddPatient(),
+        '/viewPatients': (context) => const ViewPatients(),
+        '/monitorRecords': (context) => const MonitorRecords(),
+        '/criticalPatients': (context) => const CriticalPatients(),
       },
     );
   }

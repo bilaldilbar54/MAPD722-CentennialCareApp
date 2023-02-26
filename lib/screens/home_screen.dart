@@ -48,18 +48,21 @@ class HomePage extends StatelessWidget {
                       title2: 'PATIENTS',
                       width: 120,
                       height: 120,
+                      onTap: '/addPatient',
                     ),
                     RoundButton(
                       title1: 'VIEW',
                       title2: 'PATIENTS',
                       width: 120,
                       height: 120,
+                      onTap: '/viewPatients',
                     ),
                     RoundButton(
                       title1: 'MONITOR',
                       title2: 'RECORDS',
                       width: 120,
                       height: 120,
+                      onTap: '/monitorRecords',
                     )
                   ],
                 ),
@@ -74,12 +77,14 @@ class HomePage extends StatelessWidget {
                       title2: 'PATIENTS',
                       height: 120,
                       width: 120,
+                      onTap: '/criticalPatients',
                     ),
                     RoundButton(
                       title1: 'LOGOUT',
                       title2: '🔚',
                       height: 120,
                       width: 120,
+                      onTap: '/',
                     )
                   ],
                 )
