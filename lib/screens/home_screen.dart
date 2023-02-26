@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:centennial_care/components/custom_round_button.dart';
+import 'package:centennial_care/components/home_feelings.dart';
 import 'package:centennial_care/colors.dart';
 import 'package:centennial_care/components/home_greet.dart';
 
@@ -31,15 +33,57 @@ class HomePage extends StatelessWidget {
           child: Center(
               child: Column(children: [
             const HomeGreet(),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15),
-              width: 500,
-              height: 200,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('lib/images/gradient_back.png'),
-                      fit: BoxFit.fill)),
-              child: Column(children: const []),
+            const FeelingEmoji(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 13.0),
+              child: Column(children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    RoundButton(
+                      title1: 'ADD',
+                      title2: 'PATIENTS',
+                      width: 120,
+                      height: 120,
+                    ),
+                    RoundButton(
+                      title1: 'VIEW',
+                      title2: 'PATIENTS',
+                      width: 120,
+                      height: 120,
+                    ),
+                    RoundButton(
+                      title1: 'MONITOR',
+                      title2: 'RECORDS',
+                      width: 120,
+                      height: 120,
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    RoundButton(
+                      title1: 'CRITICAL',
+                      title2: 'PATIENTS',
+                      height: 120,
+                      width: 120,
+                    ),
+                    RoundButton(
+                      title1: 'LOGOUT',
+                      title2: '🔚',
+                      height: 120,
+                      width: 120,
+                    )
+                  ],
+                )
+              ]),
             )
           ])),
         ),

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:centennial_care/colors.dart';
 
 class MyButton extends StatelessWidget {
+  final String title;
   final String onTap;
-  const MyButton({super.key, required this.onTap});
+  const MyButton({super.key, required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +22,10 @@ class MyButton extends StatelessWidget {
             elevation: MaterialStateProperty.all<double>(5.0)),
         child: Container(
           padding: const EdgeInsets.all(25),
-          child: const Center(
+          child: Center(
             child: Text(
-              'LOGIN',
-              style: TextStyle(
+              title,
+              style: const TextStyle(
                 color: darkGrey,
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
