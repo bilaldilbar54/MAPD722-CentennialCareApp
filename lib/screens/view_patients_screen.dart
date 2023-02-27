@@ -1,22 +1,7 @@
-import 'package:centennial_care/components/custom_search_textfield.dart';
 import 'package:centennial_care/components/patients_list_view.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:centennial_care/colors.dart';
-
-Future<List<dynamic>> fetchData() async {
-  final response = await http.get(Uri.parse('http://127.0.0.1:5000/patients'));
-
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response, parse the JSON
-    final data = json.decode(response.body);
-    return data;
-  } else {
-    // If the server did not return a 200 OK response, throw an error.
-    throw Exception('Failed to fetch data');
-  }
-}
+import 'package:flutter/cupertino.dart';
 
 class ViewPatients extends StatefulWidget {
   const ViewPatients({super.key});
@@ -28,11 +13,18 @@ class ViewPatients extends StatefulWidget {
 class _ViewPatientsState extends State<ViewPatients> {
   late Future<List<dynamic>> _futureData;
   final searchController = TextEditingController();
+  String? _searchText;
 
   @override
   void initState() {
     super.initState();
-    _futureData = fetchData();
+    _futureData = fetchData(query: _searchText);
+    searchController.addListener(() {
+      setState(() {
+        _searchText = searchController.text;
+        _futureData = fetchData(query: _searchText);
+      });
+    });
   }
 
   @override
@@ -74,7 +66,17 @@ class _ViewPatientsState extends State<ViewPatients> {
                   ),
                 ),
               ),
-              const SearchTextFieldClass(),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                child: CupertinoSearchTextField(
+                  placeholder: 'Enter Patient Name',
+                  backgroundColor: darkGreen,
+                  controller: searchController,
+                ),
+              ),
               PatientListView(futureData: _futureData),
             ],
           ),

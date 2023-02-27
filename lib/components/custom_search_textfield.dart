@@ -15,14 +15,16 @@ class SearchTextField extends StatelessWidget {
 }
 
 class SearchTextFieldClass extends StatefulWidget {
-  const SearchTextFieldClass({super.key});
+  const SearchTextFieldClass({
+    super.key,
+  });
 
   @override
   State<SearchTextFieldClass> createState() => _SearchTextFieldClassState();
 }
 
 class _SearchTextFieldClassState extends State<SearchTextFieldClass> {
-  late TextEditingController textController;
+  late final TextEditingController textController;
 
   @override
   void initState() {

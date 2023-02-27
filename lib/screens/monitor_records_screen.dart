@@ -11,7 +11,10 @@ class MonitorRecords extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'MONITOR RECORDS',
-          style: TextStyle(color: darkGrey, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: darkGrey,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         backgroundColor: darkGreen,
         automaticallyImplyLeading: true,
