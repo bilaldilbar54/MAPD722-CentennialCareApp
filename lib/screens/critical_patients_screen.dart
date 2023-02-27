@@ -13,7 +13,7 @@ class CriticalPatients extends StatelessWidget {
           'CRITICAL PATIENTS',
           style: TextStyle(color: darkGrey, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: lightGreen,
+        backgroundColor: darkGreen,
         automaticallyImplyLeading: true,
         iconTheme: const IconThemeData(color: darkGrey),
       ),

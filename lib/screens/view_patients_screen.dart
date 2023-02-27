@@ -42,7 +42,10 @@ class _ViewPatientsState extends State<ViewPatients> {
       appBar: AppBar(
         title: const Text(
           'VIEW PATIENTS',
-          style: TextStyle(color: darkGrey, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: darkGrey,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         backgroundColor: darkGreen,
         automaticallyImplyLeading: true,

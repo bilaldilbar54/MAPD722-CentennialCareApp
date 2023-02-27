@@ -13,7 +13,7 @@ class MonitorRecords extends StatelessWidget {
           'MONITOR RECORDS',
           style: TextStyle(color: darkGrey, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: lightGreen,
+        backgroundColor: darkGreen,
         automaticallyImplyLeading: true,
         iconTheme: const IconThemeData(color: darkGrey),
       ),

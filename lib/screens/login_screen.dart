@@ -61,12 +61,20 @@ class LoginPage extends StatelessWidget {
                   controller: usernameController,
                   hintText: 'Username',
                   obscureText: false,
+                  radius: 100,
+                  width: 500,
+                  borderColor: darkGreen,
+                  backColor: lightGrey,
                 ),
                 //Password Field
                 MyTextField(
                   controller: passwordController,
                   hintText: 'Password',
                   obscureText: true,
+                  radius: 100,
+                  width: 500,
+                  borderColor: darkGreen,
+                  backColor: lightGrey,
                 ),
                 const SizedBox(
                   height: 20,
@@ -75,6 +83,7 @@ class LoginPage extends StatelessWidget {
                 const MyButton(
                   onTap: '/home',
                   title: 'LOGIN',
+                  width: 500,
                 )
               ],
             ),
