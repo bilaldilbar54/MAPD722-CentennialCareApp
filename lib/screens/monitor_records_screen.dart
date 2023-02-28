@@ -51,8 +51,8 @@ List<Patient> patientRecords = [
     weight: 'WEIGHT: 80',
     report: 'REPORT: Heart issue',
     ward: 'WARD: Ward B room 2',
-    admitttedAt: 'ADMITTED ON: 2022-11-17T03:24:44.232+00:00',
-    updatedAt: 'LAST UPDATED: 2022-11-17T03:24:44.232+00:00',
+    admitttedAt: 'ADMITTED ON: 2022-11-17T03:24:44.232',
+    updatedAt: 'LAST UPDATED: 2022-11-17T03:24:44.232',
   ),
 ];
 
@@ -63,7 +63,7 @@ List<Test> patientTests = [
     rRate: 'RESPIRATORY RATE: 18 breaths/min',
     boLevel: 'BLOOD OXYGEN LEVEL: 98mm HG',
     hBrate: 'HEARTBEAT RATE: 72 beats/min',
-    added: 'ADDED ON: 2022-12-05T00:11:59.346+00:00',
+    added: 'ADDED ON: 2022-12-05T00:11:59.346',
   ),
 ];
 
@@ -238,7 +238,7 @@ class MonitorRecords extends StatelessWidget {
                                   Text(
                                     patientRecords[index].admitttedAt,
                                     style: const TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                       color: darkGrey,
                                     ),
@@ -249,7 +249,7 @@ class MonitorRecords extends StatelessWidget {
                                   Text(
                                     patientRecords[index].updatedAt,
                                     style: const TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                       color: darkGrey,
                                     ),

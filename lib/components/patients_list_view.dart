@@ -10,15 +10,19 @@ Future<List<dynamic>> fetchData({String? query}) async {
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response, parse the JSON
     data = json.decode(response.body);
-    if (query != null) {
-      data = data
-          .where((data) => data
-              .toString()
-              .toLowerCase()
-              .contains(query.toString().toLowerCase()))
-          .toList();
-    }
-    return data;
+    return Future.delayed(const Duration(seconds: 2)).then(
+      (_) {
+        if (query != null) {
+          data = data
+              .where((data) => data
+                  .toString()
+                  .toLowerCase()
+                  .contains(query.toString().toLowerCase()))
+              .toList();
+        }
+        return data;
+      },
+    );
   } else {
     // If the server did not return a 200 OK response, throw an error.
     throw Exception('Failed to fetch data');
@@ -191,8 +195,32 @@ class _PatientListViewState extends State<PatientListView> {
                 }));
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
+          } else {
+            if (!snapshot.hasData) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: darkGrey,
+                        width: 0.9,
+                      ),
+                    ),
+                    child: const CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(darkGreen),
+                      strokeWidth: 5,
+                    ),
+                  ),
+                ],
+              );
+            }
+            return const Center(child: CircularProgressIndicator());
           }
-          return const CircularProgressIndicator();
         }),
       ),
     );
@@ -205,14 +233,13 @@ class TextWidget extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final TextAlign align;
-  const TextWidget({
-    super.key,
-    required this.data,
-    required this.color,
-    required this.fontSize,
-    required this.fontWeight,
-    required this.align
-  });
+  const TextWidget(
+      {super.key,
+      required this.data,
+      required this.color,
+      required this.fontSize,
+      required this.fontWeight,
+      required this.align});
 
   @override
   Widget build(BuildContext context) {
