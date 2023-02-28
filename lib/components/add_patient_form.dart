@@ -214,7 +214,7 @@ class AddPatientForm extends StatelessWidget {
                 ),
                 MyTextField(
                   controller: pNumController,
-                  hintText: 'e.g. 644-877-5489',
+                  hintText: 'e.g. 6448775489',
                   obscureText: false,
                   width: 165,
                   radius: 10,

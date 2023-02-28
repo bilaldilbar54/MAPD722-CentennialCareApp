@@ -144,11 +144,10 @@ class CriticalPatients extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const SizedBox(
-                                    height: 2,
-                                  ),
                                   const Text(
-                                      '------------------------------------------------------'),
+                                    '------------------------------------------------------',
+                                    style: TextStyle(color: darkGrey),
+                                  ),
                                   const SizedBox(
                                     height: 2,
                                   ),
@@ -241,9 +240,10 @@ class CriticalPatients extends StatelessWidget {
                                     height: 2,
                                   ),
                                   const Text(
-                                      '------------------------------------------------------'),
-                                  const SizedBox(
-                                    height: 2,
+                                    '------------------------------------------------------',
+                                    style: TextStyle(
+                                      color: darkGrey,
+                                    ),
                                   ),
                                 ],
                               ),

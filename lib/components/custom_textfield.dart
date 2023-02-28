@@ -31,7 +31,7 @@ class _MyTextFieldState extends State<MyTextField> {
       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
       child: SizedBox(
         width: widget.width,
-        height: 45,
+        height: 48,
         child: TextField(
           maxLines: 1,
           controller: widget.controller,
