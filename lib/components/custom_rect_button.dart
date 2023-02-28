@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:centennial_care/colors.dart';
+import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
   final String title;
@@ -38,9 +38,9 @@ class MyButton extends StatelessWidget {
               child: Text(
                 title,
                 style: const TextStyle(
-                  color: darkGrey,
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
+                  color: darkGrey,
                 ),
               ),
             ),

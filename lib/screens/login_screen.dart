@@ -83,7 +83,7 @@ class LoginPage extends StatelessWidget {
                 const MyButton(
                   onTap: '/home',
                   title: 'LOGIN',
-                  width: 500,
+                  width: 550,
                 )
               ],
             ),

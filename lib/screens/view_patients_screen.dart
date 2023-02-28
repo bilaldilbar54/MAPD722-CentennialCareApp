@@ -71,10 +71,20 @@ class _ViewPatientsState extends State<ViewPatients> {
                   horizontal: 20,
                   vertical: 10,
                 ),
-                child: CupertinoSearchTextField(
-                  placeholder: 'Enter Patient Name',
-                  backgroundColor: darkGreen,
-                  controller: searchController,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: darkGreen,
+                    border: Border.all(
+                      color: darkGrey,
+                      width: 0.9,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: CupertinoSearchTextField(
+                    placeholder: 'Enter Patient Name',
+                    backgroundColor: Colors.transparent,
+                    controller: searchController,
+                  ),
                 ),
               ),
               PatientListView(futureData: _futureData),

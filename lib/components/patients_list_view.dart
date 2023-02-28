@@ -71,6 +71,7 @@ class _PatientListViewState extends State<PatientListView> {
                               color: darkGrey,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
+                              align: TextAlign.start,
                             ),
                             const SizedBox(height: 2),
                             Row(
@@ -81,6 +82,7 @@ class _PatientListViewState extends State<PatientListView> {
                                   color: darkGrey,
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,
+                                  align: TextAlign.start,
                                 ),
                                 const SizedBox(width: 2),
                                 TextWidget(
@@ -88,6 +90,7 @@ class _PatientListViewState extends State<PatientListView> {
                                   color: darkGrey,
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,
+                                  align: TextAlign.start,
                                 ),
                               ],
                             ),
@@ -97,6 +100,7 @@ class _PatientListViewState extends State<PatientListView> {
                               color: darkGrey,
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
+                              align: TextAlign.start,
                             ),
                             const SizedBox(height: 2),
                             TextWidget(
@@ -105,6 +109,7 @@ class _PatientListViewState extends State<PatientListView> {
                               color: darkGrey,
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
+                              align: TextAlign.start,
                             ),
                             const SizedBox(height: 2),
                             TextWidget(
@@ -113,6 +118,7 @@ class _PatientListViewState extends State<PatientListView> {
                               color: darkGrey,
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
+                              align: TextAlign.start,
                             ),
                             const SizedBox(height: 2),
                             TextWidget(
@@ -121,6 +127,7 @@ class _PatientListViewState extends State<PatientListView> {
                               color: darkGrey,
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
+                              align: TextAlign.start,
                             ),
                             const SizedBox(height: 2),
                             TextWidget(
@@ -129,6 +136,7 @@ class _PatientListViewState extends State<PatientListView> {
                               color: darkGrey,
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
+                              align: TextAlign.start,
                             ),
                             const SizedBox(height: 2),
                             TextWidget(
@@ -137,6 +145,7 @@ class _PatientListViewState extends State<PatientListView> {
                               color: darkGrey,
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
+                              align: TextAlign.start,
                             ),
                             const SizedBox(height: 2),
                             TextWidget(
@@ -145,6 +154,7 @@ class _PatientListViewState extends State<PatientListView> {
                               color: darkGrey,
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
+                              align: TextAlign.start,
                             ),
                             const SizedBox(height: 2),
                             TextWidget(
@@ -153,6 +163,7 @@ class _PatientListViewState extends State<PatientListView> {
                               color: darkGrey,
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
+                              align: TextAlign.start,
                             ),
                             const SizedBox(height: 2),
                             TextWidget(
@@ -161,6 +172,7 @@ class _PatientListViewState extends State<PatientListView> {
                               color: darkGrey,
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
+                              align: TextAlign.start,
                             ),
                             const SizedBox(height: 2),
                             TextWidget(
@@ -169,6 +181,7 @@ class _PatientListViewState extends State<PatientListView> {
                               color: darkGrey,
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
+                              align: TextAlign.start,
                             ),
                           ],
                         ),
@@ -191,18 +204,21 @@ class TextWidget extends StatelessWidget {
   final Color color;
   final double fontSize;
   final FontWeight fontWeight;
+  final TextAlign align;
   const TextWidget({
     super.key,
     required this.data,
     required this.color,
     required this.fontSize,
     required this.fontWeight,
+    required this.align
   });
 
   @override
   Widget build(BuildContext context) {
     return Text(
       data,
+      textAlign: align,
       style: TextStyle(
         color: color,
         fontSize: fontSize,

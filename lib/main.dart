@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/addPatient': (context) => AddPatient(),
         '/viewPatients': (context) => const ViewPatients(),
-        '/monitorRecords': (context) => const MonitorRecords(),
+        '/monitorRecords': (context) => MonitorRecords(),
         '/criticalPatients': (context) => const CriticalPatients(),
       },
     );
