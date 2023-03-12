@@ -301,7 +301,7 @@ class AddPatientForm extends StatelessWidget {
             ),
             MyButton(
               title: 'SUBMIT',
-              onTap: '',
+              onTap: '/home',
               width: 165,
             )
           ],

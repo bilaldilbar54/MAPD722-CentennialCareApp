@@ -222,7 +222,7 @@ class CriticalPatients extends StatelessWidget {
                                     style: const TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
-                                      color: darkGrey,
+                                      color: Colors.redAccent,
                                     ),
                                   ),
                                   const SizedBox(
