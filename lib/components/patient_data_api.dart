@@ -28,8 +28,8 @@ Future<List<dynamic>> fetchData({String? query}) async {
   }
 }
 
-updatePatientsData(String patientId, String weight, String report, String address,
-    String phoneNum, String ward) async {
+updatePatientsData(String patientId, String weight, String report,
+    String address, String phoneNum, String ward) async {
   final patientData = {
     'weight': weight,
     'report': report,

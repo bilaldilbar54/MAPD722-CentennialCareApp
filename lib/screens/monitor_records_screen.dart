@@ -386,9 +386,9 @@ class MonitorRecords extends StatelessWidget {
                   ),
                 ],
               ),
-              const MyButton(
+              MyButton(
                 title: 'ADD TESTS',
-                onTap: 'addTest',
+                onPressed: () => Navigator.of(context).pushNamed('/home'),
                 width: 180,
               ),
             ],

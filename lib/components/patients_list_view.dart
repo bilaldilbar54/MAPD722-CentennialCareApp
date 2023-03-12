@@ -228,6 +228,7 @@ class _PatientListViewState extends State<PatientListView> {
     TextEditingController wardController =
         TextEditingController(text: snapshot.data![index]['ward']);
     return showModalBottomSheet(
+      isDismissible: false,
       constraints: BoxConstraints(
         maxHeight: MediaQuery.of(context).size.height,
       ),
@@ -417,17 +418,28 @@ class _PatientListViewState extends State<PatientListView> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        MyButton(title: 'Cancel', onTap: '/home', width: 140),
-                        ElevatedButton(
-                            onPressed: () => updatePatientsData(
-                                  snapshot.data![index]['_id'],
-                                  weightController.text,
-                                  reportController.text,
-                                  addressController.text,
-                                  phoneNumberController.text,
-                                  wardController.text,
-                                ),
-                            child: Text('Submit'))
+                        MyButton(
+                          title: 'Cancel',
+                          width: 140,
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        MyButton(
+                          title: 'Submit',
+                          width: 140,
+                          onPressed: () {
+                            updatePatientsData(
+                              snapshot.data![index]['_id'],
+                              weightController.text,
+                              reportController.text,
+                              addressController.text,
+                              phoneNumberController.text,
+                              wardController.text,
+                            );
+                            Navigator.pop(context);
+                          },
+                        ),
                       ],
                     )
                   ],

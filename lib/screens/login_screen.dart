@@ -80,8 +80,10 @@ class LoginPage extends StatelessWidget {
                   height: 20,
                 ),
                 //Login Button
-                const MyButton(
-                  onTap: '/home',
+                MyButton(
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/home');
+                  },
                   title: 'LOGIN',
                   width: 550,
                 )

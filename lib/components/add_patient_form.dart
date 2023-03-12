@@ -293,15 +293,15 @@ class AddPatientForm extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             MyButton(
               title: 'CANCEL',
-              onTap: '/home',
+              onPressed: () => Navigator.pop(context, true),
               width: 165,
             ),
             MyButton(
               title: 'SUBMIT',
-              onTap: '/home',
+              onPressed: () => Navigator.pop(context, true),
               width: 165,
             )
           ],

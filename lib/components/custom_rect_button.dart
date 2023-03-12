@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
   final String title;
-  final String onTap;
   final double width;
+  final Function()? onPressed;
+
   const MyButton({
     super.key,
     required this.title,
-    required this.onTap,
     required this.width,
+    required this.onPressed,
   });
 
   @override
@@ -21,7 +22,7 @@ class MyButton extends StatelessWidget {
         height: 45,
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, onTap);
+            onPressed?.call();
           },
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(darkGreen),
