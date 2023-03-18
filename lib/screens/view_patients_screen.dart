@@ -16,9 +16,16 @@ class _ViewPatientsState extends State<ViewPatients> {
   final searchController = TextEditingController();
   String? _searchText;
 
+  Future<void> refreshData() async {
+    setState(() {
+      _futureData = fetchData(query: _searchText);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+
     _futureData = fetchData(query: _searchText);
     searchController.addListener(() {
       setState(() {
@@ -88,7 +95,11 @@ class _ViewPatientsState extends State<ViewPatients> {
                   ),
                 ),
               ),
-              PatientListView(futureData: _futureData),
+              Expanded(
+                child: RefreshIndicator(
+                    onRefresh: refreshData,
+                    child: PatientListView(futureData: _futureData)),
+              ),
             ],
           ),
         ),

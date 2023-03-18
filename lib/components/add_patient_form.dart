@@ -1,3 +1,4 @@
+import 'package:centennial_care/components/patient_data_api.dart';
 import 'package:flutter/material.dart';
 import 'package:centennial_care/components/custom_rect_button.dart';
 import 'package:centennial_care/components/custom_textfield.dart';
@@ -301,7 +302,27 @@ class AddPatientForm extends StatelessWidget {
             ),
             MyButton(
               title: 'SUBMIT',
-              onPressed: () => Navigator.pop(context, true),
+              onPressed: () async {
+                try {
+                  await addPatientRecord(
+                    patientId: patientIdController.text,
+                    firstName: fNameController.text,
+                    lastName: lNameController.text,
+                    age: int.parse(ageController.text),
+                    gender: genderController.text,
+                    weight: weightController.text,
+                    report: reportController.text,
+                    address: addressController.text,
+                    phoneNumber: pNumController.text,
+                    dateOfBirth: dateOfBirthController.text,
+                    doctor: doctorController.text,
+                    ward: wardController.text,
+                  );
+                  Navigator.pop(context, true);
+                } catch (error) {
+                  print('Error: $error');
+                }
+              },
               width: 165,
             )
           ],
