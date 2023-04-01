@@ -95,3 +95,4 @@ Future<void> addPatientRecord({
     throw Exception('Failed to add patient record.');
   }
 }
+

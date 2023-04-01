@@ -54,11 +54,12 @@ class _ViewPatientsState extends State<ViewPatients> {
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              image: const DecorationImage(
-                image: AssetImage('lib/images/background_image.png'),
-                fit: BoxFit.cover,
-              )),
+            borderRadius: BorderRadius.circular(20),
+            image: const DecorationImage(
+              image: AssetImage('lib/images/background_image.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
             children: [
               const Align(
