@@ -12,6 +12,7 @@ class MonitorPatient extends StatefulWidget {
 class _MonitorPatientState extends State<MonitorPatient> {
   late Future<List<dynamic>> _futurePatientData;
   late Future<List<dynamic>> _futureTestData;
+  var newdata;
   late final String id;
 
   @override
@@ -76,6 +77,7 @@ class _MonitorPatientState extends State<MonitorPatient> {
                           future: _futurePatientData,
                           builder: ((context, snapshot) {
                             if (snapshot.hasData) {
+                              newdata = snapshot.data!;
                               var data = snapshot.data!;
                               return ListView.builder(
                                 itemCount: data.length,
@@ -357,9 +359,29 @@ class _MonitorPatientState extends State<MonitorPatient> {
                     ),
                   ),
                   ElevatedButton(
-                      onPressed: () =>
-                          {Navigator.pushNamed(context, '/addTest')},
-                      child: const Text('ADD TEST'))
+                    onPressed: () => {
+                      Navigator.pushNamed(context, '/addTest',
+                          arguments: newdata)
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          darkGreen), // Set background color
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(100.0), // Set rounded edges
+                        ),
+                      ),
+                    ),
+                    child: const Text(
+                      'ADD TEST',
+                      style: TextStyle(
+                        color: darkGrey,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),

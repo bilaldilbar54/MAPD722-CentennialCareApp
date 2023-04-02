@@ -176,3 +176,37 @@ List<dynamic> _getLatestRecords(Map<String, List<dynamic>> groupedRecords) {
   }
   return latestRecords;
 }
+
+Future<void> postTestData(
+    String patientId,
+    String firstName,
+    String lastName,
+    String ward,
+    String nurseName,
+    String diastolic,
+    String systolic,
+    String respiratoryRate,
+    String bloodOxygenLevel,
+    String heartBeatRate) async {
+  var data = {
+    'firstName': firstName,
+    'lastName': lastName,
+    'ward': ward,
+    'nurseName': nurseName,
+    'diastolic': diastolic,
+    'systolic': systolic,
+    'respiratoryRate': respiratoryRate,
+    'bloodOxygenLevel': bloodOxygenLevel,
+    'heartBeatRate': heartBeatRate,
+  };
+
+  var response =
+      await http.post(Uri.parse('http://127.0.0.1:5000/patients/$patientId/tests'), body: data);
+
+  if (response.statusCode == 200 || response.statusCode == 201) {
+    var responseData = jsonDecode(response.body);
+    print(responseData['message']);
+  } else {
+    print('Post request failed with status: ${response.statusCode}.');
+  }
+}

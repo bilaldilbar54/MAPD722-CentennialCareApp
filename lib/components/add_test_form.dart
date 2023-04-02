@@ -1,11 +1,21 @@
 import 'package:centennial_care/colors.dart';
 import 'package:centennial_care/components/custom_rect_button.dart';
 import 'package:centennial_care/components/custom_textfield.dart';
+import 'package:centennial_care/components/patient_data_api.dart';
 import 'package:flutter/material.dart';
 
 class AddPatientTest extends StatelessWidget {
-  const AddPatientTest({
+  var patientId;
+  var firstName;
+  var lastName;
+  var ward;
+
+  AddPatientTest({
     Key? key,
+    required this.patientId,
+    required this.firstName,
+    required this.lastName,
+    required this.ward,
     required this.nurseNameController,
     required this.systolicValController,
     required this.diastolicValController,
@@ -145,9 +155,21 @@ class AddPatientTest extends StatelessWidget {
               onPressed: () => Navigator.pop(context, true),
               width: 165,
             ),
-            const MyButton(
+            MyButton(
               title: 'SUBMIT',
-              onPressed: null,
+              onPressed: (() {
+                postTestData(
+                    patientId,
+                    firstName,
+                    lastName,
+                    ward,
+                    nurseNameController.text,
+                    diastolicValController.text,
+                    systolicValController.text,
+                    respRateValController.text,
+                    bloodOxyLvlValController.text,
+                    heartBeatRateValController.text);
+              }),
               width: 165,
             )
           ],

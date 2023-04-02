@@ -14,6 +14,7 @@ class AddTest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dynamic futurePatientData = ModalRoute.of(context)?.settings.arguments;
     return Scaffold(
       backgroundColor: lightGreen,
       appBar: AppBar(
@@ -52,12 +53,16 @@ class AddTest extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 15.0),
                       child: AddPatientTest(
+                        patientId: '${futurePatientData[0]['_id']}',
+                        firstName: '${futurePatientData[0]['firstName']}',
+                        lastName: '${futurePatientData[0]['lastName']}',
+                        ward: '${futurePatientData[0]['ward']}',
                         nurseNameController: nurseNameController,
-                        systolicValController: systolicValController,
                         diastolicValController: diastolicValController,
+                        systolicValController: systolicValController,
                         respRateValController: respRateValController,
                         bloodOxyLvlValController: bloodOxyLvlValController,
-                        heartBeatRateValController: heartBeatRateValController,
+                        heartBeatRateValController: heartBeatRateValController
                       ),
                     ),
                   ],
