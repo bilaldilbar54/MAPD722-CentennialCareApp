@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:centennial_care/colors.dart';
 
 class Patient {
+  final String id;
   final String patientId;
   final String firstName;
   final String lastName;
@@ -14,6 +15,7 @@ class Patient {
   final String createdAt;
 
   Patient({
+    required this.id,
     required this.patientId,
     required this.firstName,
     required this.lastName,
@@ -24,6 +26,7 @@ class Patient {
 
   factory Patient.fromJson(Map<String, dynamic> json) {
     return Patient(
+      id: json['_id'],
       patientId: json['patientId'],
       firstName: json['firstName'],
       lastName: json['lastName'],
@@ -172,12 +175,13 @@ class _MonitorRecordsState extends State<MonitorRecords> {
                         ),
                         Center(
                           child: MyButton(
-                              title: "MONITOR PATIENT →",
-                              width: 220,
-                              onPressed: () => {
-                                    Navigator.pushNamed(
-                                        context, '/monitorPatient')
-                                  }),
+                            title: "MONITOR PATIENT →",
+                            width: 220,
+                            onPressed: () => {
+                              Navigator.pushNamed(context, '/monitorPatient',
+                                  arguments: '${_patients[index].id}')
+                            },
+                          ),
                         )
                       ],
                     ),

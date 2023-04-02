@@ -96,3 +96,83 @@ Future<void> addPatientRecord({
   }
 }
 
+Future<List<dynamic>> monitorPatientData({required String patientId}) async {
+  var data = [];
+  final response =
+      await http.get(Uri.parse('http://127.0.0.1:5000/patients/$patientId'));
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response, parse the JSON
+    data = json.decode(response.body);
+    return data;
+  } else {
+    // If the server did not return a 200 OK response, throw an error.
+    throw Exception('Failed to fetch data');
+  }
+}
+
+Future<List<dynamic>> fetchTestRecords({required String patientId}) async {
+  var data = [];
+  final response = await http
+      .get(Uri.parse('http://127.0.0.1:5000/patients/$patientId/tests'));
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response, parse the JSON
+    data = json.decode(response.body);
+    return data;
+  } else {
+    // If the server did not return a 200 OK response, throw an error.
+    throw Exception('Failed to fetch data');
+  }
+}
+
+// Future<List<dynamic>> fetchPatientsCriticalRecords() async {
+//   var data = [];
+//   final response =
+//       await http.get(Uri.parse('http://127.0.0.1:5000/patients/tests'));
+
+//   if (response.statusCode == 200) {
+//     // If the server did return a 200 OK response, parse the JSON
+//     data = json.decode(response.body);
+//     return data;
+//   } else {
+//     // If the server did not return a 200 OK response, throw an error.
+//     throw Exception('Failed to fetch data');
+//   }
+// }
+
+Future<List<dynamic>> fetchPatientsCriticalRecords() async {
+  const apiUrl = 'http://127.0.0.1:5000/patients/tests?sort=-createdAt';
+  final response = await http.get(Uri.parse(apiUrl));
+
+  if (response.statusCode == 200) {
+    final records = json.decode(response.body);
+    final groupedRecords = _groupByPatientId(records);
+    final latestRecords = _getLatestRecords(groupedRecords);
+    return latestRecords;
+  } else {
+    throw Exception('Failed to fetch data');
+  }
+}
+
+Map<String, List<dynamic>> _groupByPatientId(List<dynamic> records) {
+  final groupedRecords = <String, List<dynamic>>{};
+  for (final record in records) {
+    final patientId = record['patientId'];
+    if (!groupedRecords.containsKey(patientId)) {
+      groupedRecords[patientId] = [];
+    }
+    groupedRecords[patientId]?.add(record);
+  }
+  return groupedRecords;
+}
+
+List<dynamic> _getLatestRecords(Map<String, List<dynamic>> groupedRecords) {
+  final latestRecords = [];
+  for (final patientId in groupedRecords.keys) {
+    final patientRecords = groupedRecords[patientId];
+    patientRecords?.sort((a, b) => b['createdAt'].compareTo(a['createdAt']));
+    latestRecords.add(patientRecords?.first);
+  }
+  return latestRecords;
+}
