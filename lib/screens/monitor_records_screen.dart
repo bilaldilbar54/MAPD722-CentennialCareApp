@@ -179,7 +179,7 @@ class _MonitorRecordsState extends State<MonitorRecords> {
                             width: 220,
                             onPressed: () => {
                               Navigator.pushNamed(context, '/monitorPatient',
-                                  arguments: '${_patients[index].id}')
+                                  arguments: _patients[index].id)
                             },
                           ),
                         )

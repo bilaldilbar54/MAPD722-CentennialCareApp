@@ -1,4 +1,5 @@
 import 'package:centennial_care/screens/add_patients_screen.dart';
+import 'package:centennial_care/screens/add_tests_screen.dart';
 import 'package:centennial_care/screens/critical_patients_screen.dart';
 import 'package:centennial_care/screens/home_screen.dart';
 import 'package:centennial_care/screens/login_screen.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => LoginPage(),
         '/home': (context) => const HomePage(),
         '/addPatient': (context) => AddPatient(),
+        '/addTest': (context) => AddTest(),
         '/viewPatients': (context) => const ViewPatients(),
         '/monitorRecords': (context) => const MonitorRecords(),
         '/monitorPatient': (context) => const MonitorPatient(),

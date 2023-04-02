@@ -1,4 +1,3 @@
-import 'package:centennial_care/components/custom_rect_button.dart';
 import 'package:flutter/material.dart';
 import 'package:centennial_care/colors.dart';
 import 'package:centennial_care/components/patient_data_api.dart';
@@ -234,7 +233,7 @@ class _MonitorPatientState extends State<MonitorPatient> {
                   ),
                   Center(
                     child: SizedBox(
-                      height: 300,
+                      height: 330,
                       child: FutureBuilder<List<dynamic>>(
                           future: _futureTestData,
                           builder: ((context, snapshot) {
@@ -357,7 +356,10 @@ class _MonitorPatientState extends State<MonitorPatient> {
                           })),
                     ),
                   ),
-                  ElevatedButton(onPressed: null, child: Text('ADD'))
+                  ElevatedButton(
+                      onPressed: () =>
+                          {Navigator.pushNamed(context, '/addTest')},
+                      child: const Text('ADD TEST'))
                 ],
               ),
             ),
