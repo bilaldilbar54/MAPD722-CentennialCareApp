@@ -172,7 +172,16 @@ List<dynamic> _getLatestRecords(Map<String, List<dynamic>> groupedRecords) {
   for (final patientId in groupedRecords.keys) {
     final patientRecords = groupedRecords[patientId];
     patientRecords?.sort((a, b) => b['createdAt'].compareTo(a['createdAt']));
-    latestRecords.add(patientRecords?.first);
+    // latestRecords.add(patientRecords?.first);
+
+    final latestRecord = patientRecords?.first;
+    if (latestRecord != null && 
+        ((int.parse(latestRecord['systolic']) >= 140 && int.parse(latestRecord['diastolic']) >= 90) || 
+        (int.parse(latestRecord['respiratoryRate']) <= 12 || int.parse(latestRecord['respiratoryRate']) >= 150) || 
+        (int.parse(latestRecord['bloodOxygenLevel']) <= 94 || int.parse(latestRecord['bloodOxygenLevel']) >= 102) ||
+        (int.parse(latestRecord['heartBeatRate']) <= 65 || int.parse(latestRecord['heartBeatRate']) >= 85))) {
+      latestRecords.add(latestRecord);
+    }
   }
   return latestRecords;
 }
