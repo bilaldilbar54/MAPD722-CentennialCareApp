@@ -169,6 +169,7 @@ class AddPatientTest extends StatelessWidget {
                     respRateValController.text,
                     bloodOxyLvlValController.text,
                     heartBeatRateValController.text);
+                Navigator.pop(context);
               }),
               width: 165,
             )
