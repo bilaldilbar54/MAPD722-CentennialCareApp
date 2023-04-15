@@ -1,10 +1,11 @@
 import 'package:centennial_care/components/custom_rect_button.dart';
 import 'package:centennial_care/components/custom_textfield.dart';
 import 'package:centennial_care/components/patient_data_api.dart';
+import 'package:centennial_care/components/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:centennial_care/colors.dart';
 
-class PatientListView extends StatefulWidget {
+class PatientListView extends StatelessWidget {
   const PatientListView({
     Key? key,
     required Future<List> futureData,
@@ -14,15 +15,10 @@ class PatientListView extends StatefulWidget {
   final Future<List> _futureData;
 
   @override
-  State<PatientListView> createState() => _PatientListViewState();
-}
-
-class _PatientListViewState extends State<PatientListView> {
-  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: FutureBuilder<List<dynamic>>(
-        future: widget._futureData,
+        future: _futureData,
         builder: ((context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
@@ -169,12 +165,27 @@ class _PatientListViewState extends State<PatientListView> {
                             ],
                           ),
                         ),
-                        IconButton(
-                          icon: const Icon(Icons.edit),
-                          iconSize: 15,
-                          onPressed: () {
-                            updatePatientData(context, snapshot, index);
-                          },
+                        Column(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.edit),
+                              iconSize: 15,
+                              onPressed: () {
+                                updatePatientData(context, snapshot, index);
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.assignment_outlined),
+                              iconSize: 17,
+                              onPressed: () => {
+                                Navigator.pushNamed(
+                                  context,
+                                  '/monitorPatient',
+                                  arguments: '${snapshot.data![index]['_id']}',
+                                )
+                              },
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -449,34 +460,6 @@ class _PatientListViewState extends State<PatientListView> {
           ),
         );
       },
-    );
-  }
-}
-
-class TextWidget extends StatelessWidget {
-  final String data;
-  final Color color;
-  final double fontSize;
-  final FontWeight fontWeight;
-  final TextAlign align;
-  const TextWidget(
-      {super.key,
-      required this.data,
-      required this.color,
-      required this.fontSize,
-      required this.fontWeight,
-      required this.align});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      data,
-      textAlign: align,
-      style: TextStyle(
-        color: color,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-      ),
     );
   }
 }

@@ -4,7 +4,6 @@ import 'package:centennial_care/screens/critical_patients_screen.dart';
 import 'package:centennial_care/screens/home_screen.dart';
 import 'package:centennial_care/screens/login_screen.dart';
 import 'package:centennial_care/screens/monitor_patient_screen.dart';
-import 'package:centennial_care/screens/monitor_records_screen.dart';
 import 'package:centennial_care/screens/view_patients_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +27,6 @@ class MyApp extends StatelessWidget {
         '/addPatient': (context) => AddPatient(),
         '/addTest': (context) => AddTest(),
         '/viewPatients': (context) => const ViewPatients(),
-        '/monitorRecords': (context) => const MonitorRecords(),
         '/monitorPatient': (context) => const MonitorPatient(),
         '/criticalPatients': (context) => CriticalPatients(),
       },

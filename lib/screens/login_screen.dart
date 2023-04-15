@@ -7,8 +7,18 @@ class LoginPage extends StatelessWidget {
   LoginPage({super.key});
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
-  void loginClicked() {}
+  void loginClicked(BuildContext context) {
+    if (usernameController.text == 'admin' &&
+        passwordController.text == 'admin') {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      const snackBar =
+          SnackBar(content: Text('Incorrect username or password'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,33 +66,51 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                //Username Field
-                MyTextField(
-                  controller: usernameController,
-                  hintText: 'Username',
-                  obscureText: false,
-                  radius: 100,
-                  width: 500,
-                  borderColor: darkGreen,
-                  backColor: lightGrey,
-                ),
-                //Password Field
-                MyTextField(
-                  controller: passwordController,
-                  hintText: 'Password',
-                  obscureText: true,
-                  radius: 100,
-                  width: 500,
-                  borderColor: darkGreen,
-                  backColor: lightGrey,
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      MyTextField(
+                        controller: usernameController,
+                        hintText: 'Username',
+                        obscureText: false,
+                        radius: 100,
+                        width: 500,
+                        borderColor: darkGreen,
+                        backColor: lightGrey,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Enter Valid Username';
+                          }
+                          return null;
+                        },
+                      ),
+                      MyTextField(
+                        controller: passwordController,
+                        hintText: 'Password',
+                        obscureText: true,
+                        radius: 100,
+                        width: 500,
+                        borderColor: darkGreen,
+                        backColor: lightGrey,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Enter Correct Password';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                //Login Button
                 MyButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/home');
+                    if (_formKey.currentState!.validate()) {
+                      loginClicked(context);
+                    }
                   },
                   title: 'LOGIN',
                   width: 550,

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:centennial_care/colors.dart';
+import 'package:flutter/services.dart';
 
-class MyTextField extends StatefulWidget {
+class MyTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
@@ -9,8 +10,12 @@ class MyTextField extends StatefulWidget {
   final double radius;
   final Color backColor;
   final Color borderColor;
+  final TextInputType keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+  final String? Function(String?)? validator;
+
   const MyTextField({
-    super.key,
+    Key? key,
     required this.controller,
     required this.hintText,
     required this.obscureText,
@@ -18,43 +23,54 @@ class MyTextField extends StatefulWidget {
     required this.radius,
     required this.backColor,
     required this.borderColor,
-  });
+    this.keyboardType = TextInputType.text,
+    this.inputFormatters,
+    this.validator,
+  }) : super(key: key);
 
-  @override
-  State<MyTextField> createState() => _MyTextFieldState();
-}
-
-class _MyTextFieldState extends State<MyTextField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
       child: SizedBox(
-        width: widget.width,
+        width: width,
         height: 48,
-        child: TextField(
+        child: TextFormField(
           maxLines: 1,
-          controller: widget.controller,
-          obscureText: widget.obscureText,
+          controller: controller,
+          obscureText: obscureText,
+          keyboardType: keyboardType,
+          inputFormatters: inputFormatters,
           decoration: InputDecoration(
-              hintText: widget.hintText,
+              hintText: hintText,
               hintStyle: const TextStyle(
                 color: Colors.grey,
                 fontStyle: FontStyle.italic,
               ),
               contentPadding: const EdgeInsets.symmetric(horizontal: 5),
               enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: darkGrey,
-                  ),
-                  borderRadius: BorderRadius.circular(widget.radius)),
+                borderSide: const BorderSide(
+                  color: darkGrey,
+                ),
+                borderRadius: BorderRadius.circular(radius),
+              ),
               focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: widget.borderColor,
-                  ),
-                  borderRadius: BorderRadius.circular(widget.radius)),
-              fillColor: widget.backColor,
-              filled: true),
+                borderSide: BorderSide(
+                  color: borderColor,
+                ),
+                borderRadius: BorderRadius.circular(radius),
+              ),
+              fillColor: backColor,
+              filled: true,
+              errorBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  color: darkGrey,
+                ),
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              errorStyle: const TextStyle(height: 0.5, fontSize: 10),
+              isDense: false),
+          validator: validator,
         ),
       ),
     );

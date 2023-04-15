@@ -98,6 +98,8 @@ class _ViewPatientsState extends State<ViewPatients> {
               ),
               Expanded(
                 child: RefreshIndicator(
+                    backgroundColor: darkGrey,
+                    color: darkGreen,
                     onRefresh: refreshData,
                     child: PatientListView(futureData: _futureData)),
               ),

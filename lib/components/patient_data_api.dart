@@ -1,30 +1,33 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+const String apiUrl = 'http://127.0.0.1:5000/patients';
+
 Future<List<dynamic>> fetchData({String? query}) async {
   var data = [];
-  final response = await http.get(Uri.parse('http://127.0.0.1:5000/patients'));
+  final response = await http.get(Uri.parse(apiUrl));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response, parse the JSON
     data = json.decode(response.body);
-    return Future.delayed(const Duration(seconds: 2)).then(
-      (_) {
-        if (query != null) {
-          data = data
-              .where((data) => data
+    if (query != null) {
+      data = data
+          .where((item) =>
+              item['firstName']
+                  .toString()
+                  .toLowerCase()
+                  .contains(query.toString().toLowerCase()) ||
+              item['lastName']
                   .toString()
                   .toLowerCase()
                   .contains(query.toString().toLowerCase()))
-              .toList();
-        }
-        return data;
-      },
-    );
-  } else {
+          .toList();
+    }
     return data;
+  } else {
+    //return data;
     // If the server did not return a 200 OK response, throw an error.
-    //throw Exception('Failed to fetch data');
+    throw Exception('Failed to fetch data');
   }
 }
 
@@ -38,7 +41,7 @@ updatePatientsData(String patientId, String weight, String report,
     'ward': ward,
   };
   final response = await http.put(
-    Uri.parse('http://127.0.0.1:5000/patients/$patientId'),
+    Uri.parse('$apiUrl/$patientId'),
     body: patientData,
   );
   if (response.statusCode == 200) {
@@ -48,7 +51,7 @@ updatePatientsData(String patientId, String weight, String report,
   }
 }
 
-Future<void> addPatientRecord({
+Future addPatientRecord({
   required String patientId,
   required String firstName,
   required String lastName,
@@ -62,8 +65,6 @@ Future<void> addPatientRecord({
   required String doctor,
   required String ward,
 }) async {
-  const String apiUrl = 'http://127.0.0.1:5000/patients';
-
   final Map<String, dynamic> data = {
     'patientId': patientId,
     'firstName': firstName,
@@ -80,7 +81,7 @@ Future<void> addPatientRecord({
   };
 
   final response = await http.post(
-    Uri.parse('http://127.0.0.1:5000/patients'),
+    Uri.parse(apiUrl),
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -98,8 +99,7 @@ Future<void> addPatientRecord({
 
 Future<List<dynamic>> monitorPatientData({required String patientId}) async {
   var data = [];
-  final response =
-      await http.get(Uri.parse('http://127.0.0.1:5000/patients/$patientId'));
+  final response = await http.get(Uri.parse('$apiUrl/$patientId'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response, parse the JSON
@@ -112,13 +112,13 @@ Future<List<dynamic>> monitorPatientData({required String patientId}) async {
 }
 
 Future<List<dynamic>> fetchTestRecords({required String patientId}) async {
-  var data = [];
-  final response = await http
-      .get(Uri.parse('http://127.0.0.1:5000/patients/$patientId/tests'));
+  final response = await http.get(Uri.parse('$apiUrl/$patientId/tests'));
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response, parse the JSON
-    data = json.decode(response.body);
+    List<dynamic> data = json.decode(response.body);
+    // Sort the records in descending order based on the "timestamp" field
+    data.sort((a, b) => b["createdAt"].compareTo(a["createdAt"]));
     return data;
   } else {
     // If the server did not return a 200 OK response, throw an error.
@@ -126,25 +126,8 @@ Future<List<dynamic>> fetchTestRecords({required String patientId}) async {
   }
 }
 
-// Future<List<dynamic>> fetchPatientsCriticalRecords() async {
-//   var data = [];
-//   final response =
-//       await http.get(Uri.parse('http://127.0.0.1:5000/patients/tests'));
-
-//   if (response.statusCode == 200) {
-//     // If the server did return a 200 OK response, parse the JSON
-//     data = json.decode(response.body);
-//     return data;
-//   } else {
-//     // If the server did not return a 200 OK response, throw an error.
-//     throw Exception('Failed to fetch data');
-//   }
-// }
-
 Future<List<dynamic>> fetchPatientsCriticalRecords() async {
-  const apiUrl = 'http://127.0.0.1:5000/patients/tests?sort=-createdAt';
-  final response = await http.get(Uri.parse(apiUrl));
-
+  final response = await http.get(Uri.parse('$apiUrl/tests?sort=-createdAt'));
   if (response.statusCode == 200) {
     final records = json.decode(response.body);
     final groupedRecords = _groupByPatientId(records);
@@ -175,11 +158,14 @@ List<dynamic> _getLatestRecords(Map<String, List<dynamic>> groupedRecords) {
     // latestRecords.add(patientRecords?.first);
 
     final latestRecord = patientRecords?.first;
-    if (latestRecord != null && 
-        ((int.parse(latestRecord['systolic']) >= 140 && int.parse(latestRecord['diastolic']) >= 90) || 
-        (int.parse(latestRecord['respiratoryRate']) <= 12 || int.parse(latestRecord['respiratoryRate']) >= 150) || 
-        (int.parse(latestRecord['bloodOxygenLevel']) <= 94 || int.parse(latestRecord['bloodOxygenLevel']) >= 102) ||
-        (int.parse(latestRecord['heartBeatRate']) <= 65 || int.parse(latestRecord['heartBeatRate']) >= 85))) {
+    if (latestRecord != null &&
+        ((int.parse(latestRecord['systolic']) >= 140 &&
+                int.parse(latestRecord['diastolic']) >= 90) ||
+            (int.parse(latestRecord['respiratoryRate']) <= 12 ||
+                int.parse(latestRecord['respiratoryRate']) >= 25) ||
+            (int.parse(latestRecord['bloodOxygenLevel']) <= 90) ||
+            (int.parse(latestRecord['heartBeatRate']) <= 65 ||
+                int.parse(latestRecord['heartBeatRate']) >= 85))) {
       latestRecords.add(latestRecord);
     }
   }
@@ -210,7 +196,7 @@ Future<void> postTestData(
   };
 
   var response =
-      await http.post(Uri.parse('http://127.0.0.1:5000/patients/$patientId/tests'), body: data);
+      await http.post(Uri.parse('$apiUrl/$patientId/tests'), body: data);
 
   if (response.statusCode == 200 || response.statusCode == 201) {
     var responseData = jsonDecode(response.body);

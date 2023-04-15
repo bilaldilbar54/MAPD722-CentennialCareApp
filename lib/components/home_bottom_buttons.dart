@@ -8,43 +8,43 @@ class HomeButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 13.0),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              RoundButton(
-                title1: 'ADD',
-                title2: 'PATIENTS',
-                width: 120,
-                height: 120,
-                onTap: '/addPatient',
-              ),
-              RoundButton(
-                title1: 'VIEW',
-                title2: 'PATIENTS',
-                width: 120,
-                height: 120,
-                onTap: '/viewPatients',
-              ),
-              RoundButton(
-                title1: 'MONITOR',
-                title2: 'RECORDS',
-                width: 120,
-                height: 120,
-                onTap: '/monitorRecords',
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Row(
+    return Column(
+      children: [
+        const SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: const [
+            RoundButton(
+              title1: 'ADD',
+              title2: 'PATIENTS',
+              width: 120,
+              height: 120,
+              onTap: '/addPatient',
+            ),
+            RoundButton(
+              title1: 'VIEW',
+              title2: 'PATIENTS',
+              width: 120,
+              height: 120,
+              onTap: '/viewPatients',
+            ),
+            // RoundButton(
+            //   title1: 'MONITOR',
+            //   title2: 'RECORDS',
+            //   width: 120,
+            //   height: 120,
+            //   onTap: '/monitorRecords',
+            // )
+          ],
+        ),
+        const SizedBox(
+          height: 15,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 55.0),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
               RoundButton(
@@ -62,9 +62,9 @@ class HomeButtons extends StatelessWidget {
                 onTap: '/',
               )
             ],
-          )
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 }

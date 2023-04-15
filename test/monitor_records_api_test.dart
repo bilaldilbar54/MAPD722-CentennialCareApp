@@ -44,7 +44,7 @@ void main() {
   test('monitorPatientData throws an exception for an invalid patient ID',
       () async {
     // Arrange
-    final invalidPatientId = 'invalid_id';
+    const invalidPatientId = 'invalid_id';
 
     // Act
     final future = monitorPatientData(patientId: invalidPatientId);
